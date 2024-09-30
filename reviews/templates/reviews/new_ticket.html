@@ -1,0 +1,23 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+  <p>Add a new topic:</p>
+
+  <form action="{% url 'reviews:new_ticket' %}" method="post">
+    {% csrf_token %}
+    <div>
+      {{ form.title.label_tag }}
+      {{ form.title }} 
+    </div>
+    <div>
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+    <div>
+      {{ form.image.label_tag }}
+      {{ form.image }}
+    </div>
+    <button name="submit">Ajouter le sujet</button>
+  </form>
+
+{% endblock content %}

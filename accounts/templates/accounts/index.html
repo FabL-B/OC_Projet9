@@ -1,0 +1,17 @@
+<h2>Bienvenue sur notre site</h2>
+
+{% if user.is_authenticated %}
+    <p>Vous êtes connecté en tant que {{ user.username }}.</p>
+    <a href="{% url 'accounts:logout' %}">Se déconnecter</a>
+
+{% else %}
+    <h3>Se connecter</h3>
+    <form method="post" action="{% url 'accounts:index' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <p>Vous n'avez pas encore de compte ? <a href="{% url 'accounts:signup' %}">S'inscrire</a></p>
+{% endif %}
+

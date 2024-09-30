@@ -1,0 +1,55 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+  <h2>Détails du ticket</h2>
+
+  <div>
+    <strong>Titre :</strong> {{ ticket.title }}
+  </div>
+  <div>
+    <strong>Description :</strong> {{ ticket.description }}
+  </div>
+  {% if ticket.image %}
+    <div>
+      <strong>Image :</strong><br>
+      <img src="{{ ticket.image.url }}" alt="Image du ticket" width="300px">
+    </div>
+  {% endif %}
+  <div>
+    <strong>Date de création :</strong> {{ ticket.time_created|date:"d/m/Y H:i" }}
+  </div>
+
+  {% if existing_review %}
+    <h3>Critique pour ce ticket</h3>
+    <div>
+      <p><strong>Titre :</strong> {{ existing_review.headline }}</p>
+      <p><strong>Note :</strong> {{ existing_review.rating }}/5</p>
+      <p><strong>Commentaire :</strong> {{ existing_review.body }}</p>
+      <p><strong>Ajoutée par :</strong> {{ existing_review.user.username }}</p>
+      <p><strong>Date :</strong> {{ existing_review.time_created|date:"d/m/Y H:i" }}</p>
+    </div>
+  {% else %}
+    <h3>Ajouter une critique</h3>
+    <form action="{% url 'reviews:ticket_detail' ticket.id %}" method="post">
+      {% csrf_token %}
+      <div>
+        {{ form.headline.label_tag }}
+        {{ form.headline }}
+      </div>
+      <div>
+        {{ form.rating.label_tag }}
+        {{ form.rating }}
+      </div>
+      <div>
+        {{ form.body.label_tag }}
+        {{ form.body }}
+      </div>
+      <button type="submit">Soumettre la critique</button>
+    </form>
+  {% endif %}
+
+  <div>
+    <a href="{% url 'reviews:tickets' %}">Retour à la liste des tickets</a>
+  </div>
+
+{% endblock content %}
