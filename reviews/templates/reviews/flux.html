@@ -1,0 +1,26 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+
+<h2>Flux de posts</h2>
+
+<ul>
+  {% for post in posts %}
+    <li>
+      {% if post.content_type == 'REVIEW' %}
+        <strong>{{ post.user.username }}</strong> a posté une critique :
+        <p>{{ post.content }}</p>
+        <small>Posté le : {{ post.time_created }}</small>
+      {% elif post.content_type == 'TICKET' %}
+        <strong>{{ post.user.username }}</strong> a créé un ticket :
+        <p>{{ post.title }}</p>
+        <p>{{ post.description }}</p>
+        <small>Posté le : {{ post.time_created }}</small>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>Aucun post disponible.</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}

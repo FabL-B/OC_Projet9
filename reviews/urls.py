@@ -7,7 +7,7 @@ from . import views
 app_name = 'reviews'
 urlpatterns = [
     # Page that shows all tickets and reviews from user and follow users(Flux)
-    #path("reviews/flux/", views.flux(), name="flux"),
+    path("reviews/flux/", views.flux, name="flux"),
     # Page that shows all tickets from a user(Posts)
     path('reviews/posts/', views.posts, name='posts'),
     # Page to handle user subsriptions
