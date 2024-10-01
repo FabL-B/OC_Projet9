@@ -15,6 +15,11 @@
         <strong>{{ post.user.username }}</strong> a créé un ticket :
         <p>{{ post.title }}</p>
         <p>{{ post.description }}</p>
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 300px; height: auto;">
+        {% else %}
+          <p><em>Aucune image disponible pour ce ticket.</em></p>
+        {% endif %}
         <small>Posté le : {{ post.time_created }}</small>
       {% endif %}
     </li>
