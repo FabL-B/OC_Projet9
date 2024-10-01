@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # My apps
     'accounts',
     'reviews',
+    'flux',
     # Default django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -131,7 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # My settings
 AUTH_USER_MODEL = 'accounts.CustomUser'
-LOGIN_REDIRECT_URL = '/tickets/'
+LOGIN_REDIRECT_URL = 'flux:flux'
 LOGOUT_REDIRECT_URL = 'accounts:index'
 
 MEDIA_URL = '/media/'

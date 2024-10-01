@@ -14,7 +14,7 @@ def index(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('reviews:posts')
+                return redirect('flux:flux')
     else:
         form = AuthenticationForm()
 
@@ -26,7 +26,7 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('reviews:posts')
+            return redirect('flux:flux')
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
@@ -34,7 +34,3 @@ def signup(request):
 def logout_user(request):
     logout(request)
     return redirect('accounts:login')
-
-@login_required
-def home(request):
-    return render(request, 'reviews:posts')

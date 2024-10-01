@@ -21,8 +21,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accounts.urls')),
-    path('', include('reviews.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('reviews/', include('reviews.urls')),
+    path('', include('flux.urls'))
 ]
 
 if settings.DEBUG:

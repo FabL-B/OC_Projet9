@@ -7,7 +7,7 @@ from . import views
 app_name = 'accounts'
 urlpatterns = [
     # Index page
-    path('', views.index, name='login'),
+    path('login/', views.index, name='login'),
     # Registration page
     path('signup/', views.signup, name='signup'),
     # Logout

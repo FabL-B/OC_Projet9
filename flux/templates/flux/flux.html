@@ -1,0 +1,45 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+
+<h2>Flux de posts</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <ul class="list-unstyled">
+        {% for post in posts %}
+          <li>
+            {% if post.content_type == 'REVIEW' %}
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>{{ post.user.username }}</strong> a posté une critique :</h5>
+                  <p class="card-text">{{ post.content }}</p>
+                  <small class="text-muted">Posté le : {{ post.time_created }}</small>
+                </div>
+              </div>
+            {% elif post.content_type == 'TICKET' %}
+              <div class="card mb-4">
+                <div class="card-body">
+                  <h5 class="card-title"><strong>{{ post.user.username }}</strong> a créé un ticket :</h5>
+                  <h6>{{ post.title }}</h6>
+                  <p class="card-text">{{ post.description }}</p>
+                  {% if post.image %}
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
+                  {% else %}
+                    <p><em>Aucune image disponible pour ce ticket.</em></p>
+                  {% endif %}
+                  <small class="text-muted">Posté le : {{ post.time_created }}</small>
+                </div>
+              </div>
+            {% endif %}
+          </li>
+        {% empty %}
+          <li>Aucun post disponible.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
