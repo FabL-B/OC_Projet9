@@ -8,7 +8,7 @@
 
     {% else %}
         <h3>Se connecter</h3>
-        <form method="post" action="{% url 'accounts:index' %}">
+        <form method="post" action="{% url 'accounts:login' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Se connecter</button>

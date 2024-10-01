@@ -1,6 +1,11 @@
-<h2>Inscription</h2>
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">S'inscrire</button>
 </form>
+
+{% endblock content %}

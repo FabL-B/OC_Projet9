@@ -7,11 +7,9 @@ from . import views
 app_name = 'accounts'
 urlpatterns = [
     # Index page
-    path('', views.index, name='index'),
+    path('', views.index, name='login'),
     # Registration page
     path('signup/', views.signup, name='signup'),
-    # User home page
-    path('home/', views.home, name='home'),
     # Logout
     path('logout/', views.logout_user, name='logout'),
 ]

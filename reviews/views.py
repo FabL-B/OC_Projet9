@@ -1,9 +1,25 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Ticket, Review
+from .models import Ticket, Review, UserFollows
 from .forms import TicketForm, ReviewForm
 
+
+@login_required
+def posts(request):
+    """Show all tickets from connected user."""
+    tickets = Ticket.objects.filter(user=request.user).order_by('time_created')
+    context = {'tickets': tickets}
+    return render(request, 'reviews/posts.html', context)
+
+@login_required
+def subscriptions(request):
+    """Show all followed users and search for new users."""
+    followed_users = UserFollows.objects.filter(user=request.user)
+    context = {'followed_users', followed_users}
+    return render(request, 'reviews/subscriptions.html', context)
+
+@login_required
 def new_ticket(request):
     """Add a new ticket."""
     if request.method != 'POST':
@@ -16,17 +32,12 @@ def new_ticket(request):
             new_ticket = form.save(commit=False)
             new_ticket.user = request.user
             new_ticket.save()
-            return redirect('reviews:tickets')
+            return redirect('reviews:posts')
 
     context = {'form': form}
     return render(request, 'reviews/new_ticket.html', context)
 
-def tickets(request):
-    """Show all tickets."""
-    tickets = Ticket.objects.all()
-    context = {'tickets': tickets}
-    return render(request, 'reviews/tickets.html', context)
-
+@login_required
 def ticket_detail(request, ticket_id):
     """Show a single ticket and it's review."""
     ticket = Ticket.objects.get(id=ticket_id)

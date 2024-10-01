@@ -14,11 +14,11 @@ def index(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('reviews:tickets')
+                return redirect('reviews:posts')
     else:
         form = AuthenticationForm()
 
-    return render(request, 'accounts/index.html', {'form': form})
+    return render(request, 'accounts/login.html', {'form': form})
 
     
 def signup(request):
@@ -26,15 +26,15 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('reviews:tickets')
+            return redirect('reviews:posts')
     else:
         form = CustomUserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
 def logout_user(request):
     logout(request)
-    return redirect('accounts:index')
+    return redirect('accounts:login')
 
 @login_required
 def home(request):
-    return render(request, 'reviews:tickets')
+    return render(request, 'reviews:posts')
