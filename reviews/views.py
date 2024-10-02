@@ -70,3 +70,57 @@ def ticket_detail(request, ticket_id):
     # Display a blank fomr or existing review
     context = {'ticket': ticket, 'form': form}
     return render(request, 'reviews/ticket_detail.html', context)
+
+@login_required
+def new_review(request, ticket_id=None):
+    """Create a review from an existing or new ticket"""
+    
+    ticket = None
+    if ticket_id:
+        ticket = Ticket.objects.get(id=ticket_id)
+    
+    if request.method == 'POST':
+        # POST data submitted; process data
+        review_form = ReviewForm(request.POST)
+        
+        # If ticket exist, ticket form is prefilled
+        if ticket:
+            ticket_form = TicketForm(instance=ticket)
+        # Else create empty ticket form
+        else:
+            ticket_form = TicketForm(request.POST, request.FILES)
+            
+        if review_form.is_valid() and (not ticket or ticket_form.is_valid()):
+
+            if not ticket:
+                new_ticket = ticket_form.save(commit=False)
+                new_ticket.user = request.user
+                new_ticket.save()
+            else:
+                new_ticket = ticket
+            
+            new_review = review_form.save(commit=False)
+            new_review.user = request.user
+            new_review.ticket = new_ticket
+            new_review.save()
+    
+            return redirect('feed')
+     
+    else:
+        # Make the ticket form read-only if it already exists
+        if ticket:
+            ticket_form = TicketForm(instance=ticket)
+            review_form = ReviewForm()
+            for field in ticket_form.fields:
+                ticket_form.fields[field].widget.attrs['readonly'] = True
+
+        else:
+            # Empty forms for creating a new ticket and review
+            ticket_form = TicketForm()
+            review_form = ReviewForm()
+
+    return render(request, 'reviews/new_review.html', {
+        'ticket_form': ticket_form,
+        'review_form': review_form,
+        'ticket': ticket
+    })

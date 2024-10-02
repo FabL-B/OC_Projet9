@@ -14,4 +14,8 @@ urlpatterns = [
     path('new_ticket/', views.new_ticket, name='new_ticket'),
     # Detail page for a single ticket
     path('ticket/<int:ticket_id>/', views.ticket_detail, name='ticket_detail'),
+    # Page to create a new review and ticket
+    path('new_review/', views.new_review, name='new_review'),
+    # Page to create a new review from existing ticket
+    path('new_review/<int:ticket_id>/', views.new_review, name='new_review_for_ticket'),
 ]

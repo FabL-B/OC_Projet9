@@ -1,0 +1,44 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center">Créer une critique</h2>
+
+  {% if ticket %}
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Vous êtes en train de poster en réponse à :</h5>
+      <p><strong>{{ ticket.user.username }}</strong> a demandé une critique</p>
+      <h6>{{ ticket.title }}</h6>
+      <p>{{ ticket.description }}</p>
+      {% if ticket.image %}
+      <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
+      {% endif %}
+      <small class="text-muted">Posté le : {{ ticket.time_created }}</small>
+    </div>
+  </div>
+  {% endif %}
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if not ticket %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Livre / Article</h5>
+        {{ ticket_form.as_p }}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Critique</h5>
+        {{ review_form.as_p }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+  </form>
+</div>
+{% endblock content %}
