@@ -42,6 +42,10 @@ def new_ticket(request):
     return render(request, 'reviews/new_ticket.html', context)
 
 @login_required
+def edit_ticket(request, ticket_id):
+    pass
+
+@login_required
 def ticket_detail(request, ticket_id):
     """Show a single ticket and it's review."""
     ticket = Ticket.objects.get(id=ticket_id)
@@ -104,7 +108,7 @@ def new_review(request, ticket_id=None):
             new_review.ticket = new_ticket
             new_review.save()
     
-            return redirect('feed')
+            return redirect('flux:flux')
      
     else:
         # Make the ticket form read-only if it already exists
@@ -124,3 +128,7 @@ def new_review(request, ticket_id=None):
         'review_form': review_form,
         'ticket': ticket
     })
+
+@login_required
+def edit_review(request, review_id):
+    pass
