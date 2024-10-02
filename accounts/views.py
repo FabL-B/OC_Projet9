@@ -18,7 +18,8 @@ def index(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, 'accounts/login.html', {'form': form})
+    context = {'form': form}
+    return render(request, 'accounts/login.html', context)
 
     
 def signup(request):
@@ -29,7 +30,9 @@ def signup(request):
             return redirect('flux:flux')
     else:
         form = CustomUserCreationForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+
+    context = {'form': form}
+    return render(request, 'accounts/signup.html', context)
 
 def logout_user(request):
     logout(request)

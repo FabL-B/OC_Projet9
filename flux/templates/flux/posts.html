@@ -1,0 +1,40 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center">Mes publications</h2>
+
+  <ul class="list-unstyled">
+    {% for ticket in tickets %}
+    <li>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Ticket : {{ ticket.title }}</h5>
+          <p>{{ ticket.description }}</p>
+          {% if ticket.image %}
+          <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
+          {% endif %}
+          <small class="text-muted">Posté le : {{ ticket.time_created }}</small>
+          <a href="{% url 'reviews:edit_ticket' ticket.id %}" class="btn btn-warning">Modifier</a>
+          <a href="{% url 'reviews:delete_ticket' ticket.id %}" class="btn btn-danger">Supprimer</a>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+
+    {% for review in reviews %}
+    <li>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Critique pour {{ review.ticket.title }}</h5>
+          <p>{{ review.content }}</p>
+          <small class="text-muted">Posté le : {{ review.time_created }}</small>
+          <a href="{% url 'reviews:edit_review' review.id %}" class="btn btn-warning">Modifier</a>
+          <a href="{% url 'reviews:delete_review' review.id %}" class="btn btn-danger">Supprimer</a>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

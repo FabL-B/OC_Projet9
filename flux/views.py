@@ -28,5 +28,18 @@ def flux(request):
         key=lambda post: post.time_created,
         reverse=True
     )
+
+    context = {'posts': posts}
+    return render(request, 'flux/flux.html', context)
+
+@login_required
+def posts(request):
+    """Show only reviews and tickets from connected user."""
+    # Récupérer tous les tickets et reviews de l'utilisateur connecté
+    user_tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
+    user_reviews = Review.objects.filter(user=request.user).order_by('-time_created')
     
-    return render(request, 'flux/flux.html', context={'posts': posts})
+    context = {'tickets': user_tickets,
+               'reviews': user_reviews,
+               }
+    return render(request, 'flux/posts.html', context)

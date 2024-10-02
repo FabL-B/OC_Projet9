@@ -1,15 +1,12 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
-
-<div class="mb-4 text-center">
-  <a href="{% url 'reviews:new_ticket' %}" class="btn btn-primary">Demander une critique</a>
-  <a href="{% url 'reviews:new_review' %}" class="btn btn-secondary">Créer une critique</a>
-</div>
-
-<h2>Flux de posts</h2>
-
 <div class="container">
+  <h2 class="text-center">Flux de posts</h2>
+  <div class="mb-4 text-center">
+    <a href="{% url 'reviews:new_ticket' %}" class="btn btn-primary">Demander une critique</a>
+    <a href="{% url 'reviews:new_review' %}" class="btn btn-secondary">Créer une critique</a>
+  </div>
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
       <ul class="list-unstyled">
