@@ -109,7 +109,7 @@ def new_review(request, ticket_id=None):
         else:
             ticket_form = TicketForm(request.POST, request.FILES)
             
-        if review_form.is_valid() and (not ticket or ticket_form.is_valid()):
+        if review_form.is_valid() and (ticket or ticket_form.is_valid()):
 
             if not ticket:
                 new_ticket = ticket_form.save(commit=False)

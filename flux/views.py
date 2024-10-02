@@ -21,7 +21,11 @@ def flux(request):
     # Get tickets from connected and followed users
     tickets = Ticket.objects.filter(user__in=[request.user.id] + list(followed_users))
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    
+
+    # Check if each ticket has an associated review
+    for ticket in tickets:
+        ticket.has_review = Review.objects.filter(ticket=ticket).exists()
+
     # Combine and sort posts (tickets and reviews)
     posts = sorted(
         chain(reviews, tickets),
@@ -35,11 +39,19 @@ def flux(request):
 @login_required
 def posts(request):
     """Show only reviews and tickets from connected user."""
-    # Récupérer tous les tickets et reviews de l'utilisateur connecté
-    user_tickets = Ticket.objects.filter(user=request.user).order_by('-time_created')
-    user_reviews = Review.objects.filter(user=request.user).order_by('-time_created')
+
+    # Get reviews from connected and followed users
+    user_reviews = Review.objects.filter(user=request.user.id)
+    user_reviews = user_reviews.annotate(content_type=Value('REVIEW', CharField()))
+    # Get tickets from connected and followed users
+    user_tickets = Ticket.objects.filter(user=request.user.id)
+    user_tickets = user_tickets.annotate(content_type=Value('TICKET', CharField()))
     
-    context = {'tickets': user_tickets,
-               'reviews': user_reviews,
-               }
+    posts = sorted(
+        chain(user_reviews, user_tickets),
+        key=lambda post: post.time_created,
+        reverse=True
+    )
+    
+    context = {'posts': posts}
     return render(request, 'flux/posts.html', context)

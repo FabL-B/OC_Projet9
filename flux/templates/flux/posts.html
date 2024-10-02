@@ -5,35 +5,49 @@
   <h2 class="text-center">Mes publications</h2>
 
   <ul class="list-unstyled">
-    {% for ticket in tickets %}
+    {% for post in posts %}
     <li>
+      {% if post.content_type == 'REVIEW' %}
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">Ticket : {{ ticket.title }}</h5>
-          <p>{{ ticket.description }}</p>
-          {% if ticket.image %}
-          <img src="{{ ticket.image.url }}" alt="{{ ticket.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
-          {% endif %}
-          <small class="text-muted">Posté le : {{ ticket.time_created }}</small>
-          <a href="{% url 'reviews:edit_ticket' ticket.id %}" class="btn btn-warning">Modifier</a>
-          <a href="{% url 'reviews:delete_ticket' ticket.id %}" class="btn btn-danger">Supprimer</a>
+          <h5 class="card-title"><strong>Vous</strong> a publié une critique :</h5>
+          <h6>{{ post.headline }}</h6>
+          <p class="card-text">{{ post.body }}</p>
+          <small class="text-muted">Posté le : {{ post.time_created }}</small>
+          <div class="card mt-4">
+            <div class="card-body">
+              <h6 class="card-title">Ticket - <strong>{{ post.user.username }}</strong></h6>
+              <h7>{{ post.ticket.title }}</h7>
+              {% if post.ticket.image %}
+                <img src="{{ post.ticket.image.url }}" alt="{{ post.ticket.title }}" class="img-fluid" style="max-width: 150px; height: auto;">
+              {% endif %}
+            </div>
+          </div>
+          <a href="{% url 'reviews:edit_review' post.id %}" class="btn btn-warning">Modifier</a>
+          <a href="{% url 'reviews:delete_review' post.id %}" class="btn btn-danger">Supprimer</a>
         </div>
       </div>
-    </li>
-    {% endfor %}
 
-    {% for review in reviews %}
-    <li>
+      {% elif post.content_type == 'TICKET' %}
       <div class="card mb-4">
         <div class="card-body">
-          <h5 class="card-title">Critique pour {{ review.ticket.title }}</h5>
-          <p>{{ review.content }}</p>
-          <small class="text-muted">Posté le : {{ review.time_created }}</small>
-          <a href="{% url 'reviews:edit_review' review.id %}" class="btn btn-warning">Modifier</a>
-          <a href="{% url 'reviews:delete_review' review.id %}" class="btn btn-danger">Supprimer</a>
+          <h5 class="card-title"><strong>Vous</strong> avez publié un ticket :</h5>
+          <h6>{{ post.title }}</h6>
+          <p class="card-text">{{ post.description }}</p>
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
+          {% else %}
+            <p><em>Aucune image disponible pour ce ticket.</em></p>
+          {% endif %}
+          <small class="text-muted">Posté le : {{ post.time_created }}</small>
+          <a href="{% url 'reviews:edit_ticket' post.id %}" class="btn btn-warning">Modifier</a>
+          <a href="{% url 'reviews:delete_ticket' post.id %}" class="btn btn-danger">Supprimer</a>
         </div>
       </div>
+      {% endif %}
     </li>
+    {% empty %}
+    <li>Aucune publication disponible.</li>
     {% endfor %}
   </ul>
 </div>
