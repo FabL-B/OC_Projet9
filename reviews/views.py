@@ -28,17 +28,17 @@ def new_ticket(request):
     """Add a new ticket."""
     if request.method != 'POST':
         # No data submitted; create a blank form
-        form = TicketForm()
+        ticket_form = TicketForm()
     else:
         # POST data subimtted; process data
-        form = TicketForm(data=request.POST)
-        if form.is_valid():
-            new_ticket = form.save(commit=False)
+        ticket_form = TicketForm(data=request.POST)
+        if ticket_form.is_valid():
+            new_ticket = ticket_form.save(commit=False)
             new_ticket.user = request.user
             new_ticket.save()
             return redirect('reviews:posts')
 
-    context = {'form': form}
+    context = {'ticket_form': ticket_form}
     return render(request, 'reviews/new_ticket.html', context)
 
 @login_required

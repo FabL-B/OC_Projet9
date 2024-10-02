@@ -1,23 +1,19 @@
 {% extends 'reviews/base.html' %}
 
 {% block content %}
-  <p>Add a new topic:</p>
+<div class="container">
+  <h2 class="text-center"></h2>
 
-  <form action="{% url 'reviews:new_ticket' %}" method="post">
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div>
-      {{ form.title.label_tag }}
-      {{ form.title }} 
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">Livre / Article</h5>
+        {{ ticket_form.as_p }}
+      </div>
     </div>
-    <div>
-      {{ form.description.label_tag }}
-      {{ form.description }}
-    </div>
-    <div>
-      {{ form.image.label_tag }}
-      {{ form.image }}
-    </div>
-    <button name="submit">Ajouter le sujet</button>
-  </form>
 
+    <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+  </form>
+</div>
 {% endblock content %}
