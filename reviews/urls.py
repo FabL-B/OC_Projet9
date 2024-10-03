@@ -6,11 +6,6 @@ from . import views
 
 app_name = 'reviews'
 urlpatterns = [
-    # Detail page for a single ticket
-    path('ticket/<int:ticket_id>/', views.ticket_detail, name='ticket_detail'),
-    # Page to handle user subsriptions
-    path("subscriptions/", views.subscriptions, name="subscriptions"),
-    
     # Page to create a new ticket
     path('new_ticket/', views.new_ticket, name='new_ticket'),
     # Page for editing a ticket

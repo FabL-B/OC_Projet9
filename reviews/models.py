@@ -30,28 +30,3 @@ class Review(models.Model):
     def __str__(self):
         """Return a string representation of the model."""
         return f"{self.headline[:50]}..."
-
-
-class UserFollows(models.Model):
-    """A model to represent the 'following' relationship between users."""
-    
-    # Users this user is following
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='following'
-    )
-    
-    # Users who are following this user
-    followed_user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='followed_by'
-    )
-
-    class Meta:
-        # Ensure that each user can only follow another user once
-        unique_together = ('user', 'followed_user')
-
-    def __str__(self):
-        return f"{self.user} follows {self.followed_user}"

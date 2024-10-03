@@ -1,20 +1,9 @@
-from itertools import chain
-
-from django.db.models import CharField, Value
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Ticket, Review, UserFollows
+from .models import Ticket, Review
 from .forms import TicketForm, ReviewForm
-from accounts.models import CustomUser
 
-@login_required
-def subscriptions(request):
-    """Show all followed users and search for new users."""
-    followed_users = UserFollows.objects.filter(user=request.user)
-    
-    context = {'followed_users': followed_users}
-    return render(request, 'reviews/subscriptions.html', context)
 
 @login_required
 def new_ticket(request):
