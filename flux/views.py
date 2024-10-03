@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from reviews.models import Ticket, Review
 from subscriptions.models import UserFollows
+from accounts.models import CustomUser
 
 
 @login_required
@@ -36,14 +37,19 @@ def flux(request):
     return render(request, 'flux/flux.html', context)
 
 @login_required
-def posts(request):
-    """Show only reviews and tickets from connected user."""
+def posts(request, user_id=None):
+    """Show only reviews and tickets from connected user or selected user."""
 
+    if user_id:
+        user = CustomUser.objects.get(id=user_id)
+    else:
+        user = request.user
+        
     # Get reviews from connected and followed users
-    user_reviews = Review.objects.filter(user=request.user.id)
+    user_reviews = Review.objects.filter(user=user)
     user_reviews = user_reviews.annotate(content_type=Value('REVIEW', CharField()))
     # Get tickets from connected and followed users
-    user_tickets = Ticket.objects.filter(user=request.user.id)
+    user_tickets = Ticket.objects.filter(user=user)
     user_tickets = user_tickets.annotate(content_type=Value('TICKET', CharField()))
     
     posts = sorted(
@@ -52,5 +58,7 @@ def posts(request):
         reverse=True
     )
     
-    context = {'posts': posts}
+    context = {'posts': posts,
+               'user_profile': user,
+               }
     return render(request, 'flux/posts.html', context)
