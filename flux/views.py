@@ -1,12 +1,11 @@
 from itertools import chain
 
 from django.db.models import CharField, Value
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from reviews.models import Ticket, Review, UserFollows
-from reviews.forms import TicketForm, ReviewForm
-from accounts.models import CustomUser
+from reviews.models import Ticket, Review
+from subscriptions.models import UserFollows
 
 
 @login_required
