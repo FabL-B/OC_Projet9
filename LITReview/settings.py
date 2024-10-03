@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'accounts',
     'reviews',
     'flux',
+    'subscriptions',
     # Default django apps
     'django.contrib.admin',
     'django.contrib.auth',

@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('reviews/', include('reviews.urls')),
-    path('', include('flux.urls'))
+    path('', include('flux.urls')),
+    path('subscriptions/', include('subscriptions.urls'))
 ]
 
 if settings.DEBUG:

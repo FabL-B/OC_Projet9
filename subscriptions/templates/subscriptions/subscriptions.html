@@ -1,0 +1,50 @@
+{% extends 'reviews/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Gérer les abonnements</h2>
+
+  <form method="GET" action="{% url 'subscriptions:subscriptions' %}">
+    <div class="input-group mb-3">
+      <input type="text" name="username" class="form-control" placeholder="Rechercher un utilisateur..." required>
+      <button class="btn btn-primary" type="submit">Rechercher</button>
+    </div>
+  </form>
+
+  {% if search_results %}
+  <div class="alert alert-success">
+    <p>Utilisateur trouvé : <strong>{{ search_results.username }}</strong></p>
+    <form method="POST" action="{% url 'subscriptions:follow_user' search_results.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Suivre</button>
+    </form>
+  </div>
+  {% elif request.GET.username %}
+  <div class="alert alert-danger">
+    <p>Utilisateur non trouvé.</p>
+  </div>
+  {% endif %}
+
+  <h3>Utilisateurs suivis</h3>
+  <ul class="list-group">
+    {% for follow in followed_users %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="{% url 'flux:user_posts' follow.followed_user.id %}">{{ follow.followed_user.username }}</a>
+      <form method="POST" action="{% url 'subscriptions:unfollow' follow.followed_user.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">Désabonner</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Abonnés</h3>
+  <ul class="list-group">
+    {% for follower in followers %}
+    <li class="list-group-item">{{ follower.user.username }}</li>
+    {% empty %}
+    <li class="list-group-item">Vous n'avez pas encore d'abonnés.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
