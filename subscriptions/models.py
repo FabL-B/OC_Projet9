@@ -2,16 +2,17 @@ from django.db import models
 
 from LITReview import settings
 
+
 class UserFollows(models.Model):
     """A model to represent the 'following' relationship between users."""
-    
+
     # Users this user is following
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='following'
     )
-    
+
     # Users who are following this user
     followed_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
