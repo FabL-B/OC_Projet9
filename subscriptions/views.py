@@ -26,7 +26,7 @@ def manage_subscriptions(request):
                 user_to_follow and
                 user_to_follow != request.user and
                 user_to_follow.id not in followed_users.values_list(
-                        'followed_user', flat=True)
+                    'followed_user', flat=True)
             ):
                 search_results = user_to_follow
 

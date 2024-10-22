@@ -103,7 +103,7 @@ def new_review(request, ticket_id=None):
         "ticket_form": ticket_form,
         "review_form": review_form,
         "ticket": ticket
-        }
+    }
     return render(request, "reviews/new_review.html", context)
 
 
