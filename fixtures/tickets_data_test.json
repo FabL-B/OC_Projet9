@@ -1,0 +1,57 @@
+[
+    {
+        "model": "reviews.ticket",
+        "pk": 1,
+        "fields": {
+            "title": "Demande de critique pour 'Dune'",
+            "description": "J'aimerais des avis sur 'Dune' de Frank Herbert.",
+            "user": 1,
+            "image": "ticket_img/dune.jpg",
+            "time_created": "2024-10-01T09:01:00Z"
+        }
+    },
+    {
+        "model": "reviews.ticket",
+        "pk": 2,
+        "fields": {
+            "title": "Critique de 'Globalia'",
+            "description": "Que pensez-vous de 'Globalia' de Jean-Christophe Rufin ?",
+            "user": 2,
+            "image": "ticket_img/globalia.jpg",
+            "time_created": "2024-10-01T09:15:00Z"
+        }
+    },
+    {
+        "model": "reviews.ticket",
+        "pk": 3,
+        "fields": {
+            "title": "Avis sur 'Hypérion'",
+            "description": "Critiques bienvenues sur 'Hypérion' de Dan Simmons.",
+            "user": 3,
+            "image": "ticket_img/hyperion.jpg",
+            "time_created": "2024-10-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "reviews.ticket",
+        "pk": 4,
+        "fields": {
+            "title": "Vos avis sur 'L'amour de la vie'",
+            "description": "Quels sont vos avis sur 'L'amour de la vie' de Jack London ?",
+            "user": 4,
+            "image": "ticket_img/l_amour_de_la_vie.jpg",
+            "time_created": "2024-10-01T11:30:00Z"
+        }
+    },
+    {
+        "model": "reviews.ticket",
+        "pk": 5,
+        "fields": {
+            "title": "Demande de critiques sur 'La Planète des singes'",
+            "description": "Je cherche des critiques sur 'La Planète des singes' de Pierre Boulle.",
+            "user": 5,
+            "image": "ticket_img/la_planete_des_singes.jpg",
+            "time_created": "2024-10-01T12:00:00Z"
+        }
+    }
+]

@@ -52,11 +52,21 @@ LITReview is a Django application that allows users to request and publish revie
     python manage.py migrate
     ```
 
-2. Create a superuser for Django’s admin interface:
+2. Populate the database with test data using fixtures:
 
     ```bash
-    python manage.py createsuperuser
+    python manage.py loaddata fixtures/users_data_test.json
+    python manage.py loaddata fixtures/tickets_data_test.json
+    python manage.py loaddata fixtures/reviews_data_test.json
     ```
+
+3. The superuser for accessing the Django admin interface is:
+- Username: ```admin```
+- Password: ```mdpadmin```
+
+4. Test users are available for logging in and testing the application's features:
+- Usernames: ```user1```, ```user2```, ```user3```, ```user4```, ```user5```
+- Password: ```mdpusertest``` (same for all test users)
 
 ## Running the application:
 
@@ -72,3 +82,12 @@ LITReview is a Django application that allows users to request and publish revie
     http://127.0.0.1:8000
     ```
 
+## Accessing the Admin Interface:
+
+To access the admin interface, navigate to:
+
+```bash
+http://127.0.0.1:8000/admin
+```
+
+Log in using the admin credentials provided above.

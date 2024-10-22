@@ -24,7 +24,9 @@
                       <h6 class="card-title">Ticket - <strong>{{ post.user.username }}</strong></h6>
                       <h7>{{ post.ticket.title }}</h7>
                       {% if post.ticket.image %}
-                        <img src="{{ post.ticket.image.url }}" alt="{{ post.ticket.title }}" class="img-fluid" style="max-width: 150px; height: auto;">
+                        <div class="mb-2">
+                          <img src="{{ post.ticket.image.url }}" alt="{{ post.ticket.title }}" class="img-fluid" style="max-width: 150px; height: auto;">
+                        </div>
                       {% endif %}
                     </div>
                   </div>
@@ -39,8 +41,10 @@
                   <h6>{{ post.title }}</h6>
                   <p class="card-text">{{ post.description }}</p>
                   {% if post.image %}
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
-                  {% else %}
+                    <div class="mb-2">
+                      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="max-width: 300px; height: auto;">
+                    </div>
+                      {% else %}
                     <p><em>Aucune image disponible pour ce ticket.</em></p>
                   {% endif %}
                   <small class="text-muted">Posté le : {{ post.time_created }}</small>

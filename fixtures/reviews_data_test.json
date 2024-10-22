@@ -1,0 +1,62 @@
+[
+    {
+        "model": "reviews.review",
+        "pk": 1,
+        "fields": {
+            "ticket": 1,
+            "rating": 5,
+            "user": 3,
+            "headline": "Dune est un chef-d'œuvre",
+            "body": "L'univers de Dune est incroyablement riche et captivant, avec des réflexions profondes sur la politique et l'écologie.",
+            "time_created": "2024-10-02T09:00:00Z"
+        }
+    },
+    {
+        "model": "reviews.review",
+        "pk": 2,
+        "fields": {
+            "ticket": 2,
+            "rating": 4,
+            "user": 4,
+            "headline": "Globalia : une dystopie fascinante",
+            "body": "Jean-Christophe Rufin explore les limites de la liberté et du contrôle dans une société utopique et oppressante.",
+            "time_created": "2024-10-02T10:15:00Z"
+        }
+    },
+    {
+        "model": "reviews.review",
+        "pk": 3,
+        "fields": {
+            "ticket": 3,
+            "rating": 5,
+            "user": 2,
+            "headline": "Hypérion : une épopée époustouflante",
+            "body": "Hypérion est une saga de science-fiction d'une profondeur incroyable, avec des personnages inoubliables.",
+            "time_created": "2024-10-02T11:30:00Z"
+        }
+    },
+    {
+        "model": "reviews.review",
+        "pk": 4,
+        "fields": {
+            "ticket": 4,
+            "rating": 4,
+            "user": 6,
+            "headline": "L'amour de la vie : une ode à la résilience",
+            "body": "Jack London capture la lutte pour la survie avec une intensité et une beauté saisissantes.",
+            "time_created": "2024-10-02T12:45:00Z"
+        }
+    },
+    {
+        "model": "reviews.review",
+        "pk": 5,
+        "fields": {
+            "ticket": 5,
+            "rating": 3,
+            "user": 5,
+            "headline": "La Planète des singes : un regard percutant",
+            "body": "Un roman qui questionne les préjugés et la nature humaine de manière percutante, tout en étant divertissant.",
+            "time_created": "2024-10-02T14:00:00Z"
+        }
+    }
+]

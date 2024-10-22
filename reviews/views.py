@@ -13,7 +13,7 @@ def new_ticket(request):
         ticket_form = TicketForm()
     else:
         # POST data subimtted; process data
-        ticket_form = TicketForm(data=request.POST)
+        ticket_form = TicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
             new_ticket = ticket_form.save(commit=False)
             new_ticket.user = request.user
