@@ -21,7 +21,7 @@
                   <small class="text-muted">Posté le : {{ post.time_created }}</small>
                   <div class="card mt-4">
                     <div class="card-body">
-                      <h6 class="card-title">Ticket - <strong>{{ post.user.username }}</strong></h6>
+                      <h6 class="card-title">Ticket - <strong>{{ post.ticket.user.username }}</strong></h6>
                       <h7>{{ post.ticket.title }}</h7>
                       {% if post.ticket.image %}
                         <div class="mb-2">
