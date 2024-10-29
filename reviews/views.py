@@ -28,7 +28,7 @@ def new_ticket(request):
 def edit_ticket(request, ticket_id):
     """Edit a ticket."""
     # Get the ticket to edit from the ID in the URL
-    ticket = Ticket.objects.get(id=ticket_id)
+    ticket = Ticket.objects.get(id=ticket_id, user=request.user)
     if request.method == "POST":
         form = TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
@@ -45,7 +45,7 @@ def edit_ticket(request, ticket_id):
 def delete_ticket(request, ticket_id):
     """Delete a ticket."""
     # Get the ticket to delete from the ID in the URL
-    ticket = Ticket.objects.get(id=ticket_id)
+    ticket = Ticket.objects.get(id=ticket_id, user=request.user)
     if request.method == "POST":
         ticket.delete()
         return redirect("flux:posts")
@@ -111,7 +111,7 @@ def new_review(request, ticket_id=None):
 def edit_review(request, review_id):
     """Edit a review"""
     # Get the review to edit from the ID in the URL
-    review = Review.objects.get(id=review_id)
+    review = Review.objects.get(id=review_id, user=request.user)
     if request.method == "POST":
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
@@ -128,7 +128,7 @@ def edit_review(request, review_id):
 def delete_review(request, review_id):
     """Delete a review."""
     # Get the review to delete from the ID in the URL
-    review = Review.objects.get(id=review_id)
+    review = Review.objects.get(id=review_id, user=request.user)
     if request.method == "POST":
         review.delete()
         return redirect("flux:posts")
